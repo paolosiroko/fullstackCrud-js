@@ -24,6 +24,29 @@ app.get("/api/get", (req,res) => {
             })
     
 })
+app.post("/api/post", (req,res) => {
+    const {name,email, contact} = req.body;
+    const sqlInsert = "INSERT INTO contact_db  (name, email , contact) VALUES (?,?,?)";
+            db.query(sqlInsert,[name, email,contact], (error, result) =>{
+              if(error){
+                console.log(error);
+              }
+                // res.send(result)
+            })
+    
+})
+
+app.delete("/api/remove/:id", (req,res) => {
+    const {id} = req.params;
+    const sqlRemove = "DELETE FROM contact_db WHERE id = ?";
+            db.query(sqlRemove,id, (error, result) =>{
+              if(error){
+                console.log(error);
+              }
+            })
+    
+})
+
 
 app.get("/", (req,res) => {
     // const sqlInsert =
